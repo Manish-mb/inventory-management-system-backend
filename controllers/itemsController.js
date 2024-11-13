@@ -80,7 +80,8 @@ class ItemsController {
     }
   };
   static EditItem = async (req, res) => {
-    console.log("save item called");
+    // console.log("save item called");
+    console.log("Edit item called with data:", req.body);
     try {
       const {
         _id,

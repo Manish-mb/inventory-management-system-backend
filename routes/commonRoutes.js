@@ -2,8 +2,14 @@ import express from "express";
 import ItemsController from "../controllers/itemsController.js";
 import OrdersController from "../controllers/ordersController.js";
 import inventoryController from "../controllers/inventoryController.js";
+import AuthController from "../controllers/AuthController.js";
 
 const router = express.Router();
+
+// reister & login
+router.post("/register",AuthController.register);
+router.post("/login",AuthController.login);
+
 
 // Public Routes
 //inventory

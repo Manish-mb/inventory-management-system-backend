@@ -68,10 +68,13 @@ export const saveItemModal = (data) => {
 export const updateItemModal = (id, data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const updatedDocument = await ItemsModel.findByIdAndUpdate(id, data, {
-        new: true,
-        runValidators: true,
-      });
+      const updatedDocument = await ItemsModel.findByIdAndUpdate(
+        id,
+        { $set: data },
+        {
+          new: true,
+          runValidators: true,
+        });
       if (!updatedDocument) {
         return reject(new Error("Item not found"));
       }
@@ -86,11 +89,11 @@ export const updateItemQuantityModal = (id, quantity, operation) => {
   return new Promise(async (resolve, reject) => {
     try {
       // Determine the updated quantity based on the operation
-      const update = operation === 'add' 
+      const update = operation === 'add'
         ? { $inc: { quantity: quantity } } // Increment quantity
-        : operation === 'remove' 
-        ? { $inc: { quantity: -quantity } } // Decrement quantity
-        : null;
+        : operation === 'remove'
+          ? { $inc: { quantity: -quantity } } // Decrement quantity
+          : null;
 
       if (!update) {
         return reject(new Error("Invalid operation. Use 'add' or 'remove'."));
